@@ -1,7 +1,5 @@
 package com.alxg.leetcode.sudoku;
 
-import sun.dc.pr.PRError;
-
 import java.util.Arrays;
 
 public class Solution {
@@ -18,9 +16,8 @@ public class Solution {
 	}
 
 	private boolean solveSudoku(int[][] intBoard) {
-		int[] firstEmptyCellCoordinates = findFirstEmptyCell(intBoard);
+		int[] firstEmptyCellCoordinates = getFirstEmptyCellCoordinates(intBoard);
 		if (firstEmptyCellCoordinates == null) {
-			Arrays.stream(intBoard).forEach(row -> System.out.println(Arrays.toString(row) + '\n'));
 			return true;
 		}
 
@@ -28,7 +25,7 @@ public class Solution {
 		int columnIndex = firstEmptyCellCoordinates[1];
 
 		for (int candidate = 1; candidate <= BOARD_SIZE; candidate++) {
-			if (isAllowed(intBoard, rowIndex, columnIndex, candidate)) {
+			if (constraintsSatisfied(intBoard, rowIndex, columnIndex, candidate)) {
 				intBoard[rowIndex][columnIndex] = candidate;
 
 				if (solveSudoku(intBoard)) {
@@ -42,13 +39,13 @@ public class Solution {
 		return false;
 	}
 
-	private boolean isAllowed(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
-		return isRowSafe(intBoard, rowIndex, columnIndex, candidate)
-				&& isColumnSafe(intBoard, rowIndex, columnIndex, candidate)
-				&& isSquareSafe(intBoard, rowIndex, columnIndex, candidate);
+	private boolean constraintsSatisfied(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
+		return rowConstraintSatisfied(intBoard, rowIndex, columnIndex, candidate)
+				&& columnConstraintSatisfied(intBoard, rowIndex, columnIndex, candidate)
+				&& squareConstraintSatisfied(intBoard, rowIndex, columnIndex, candidate);
 	}
 
-	private boolean isRowSafe(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
+	private boolean rowConstraintSatisfied(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if (i == rowIndex) continue;
 			int currentCell = intBoard[i][columnIndex];
@@ -59,7 +56,7 @@ public class Solution {
 		return true;
 	}
 
-	private boolean isColumnSafe(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
+	private boolean columnConstraintSatisfied(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if (i == columnIndex) continue;
 			int currentCell = intBoard[rowIndex][i];
@@ -70,7 +67,7 @@ public class Solution {
 		return true;
 	}
 
-	private boolean isSquareSafe(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
+	private boolean squareConstraintSatisfied(int[][] intBoard, int rowIndex, int columnIndex, int candidate) {
 		int rowOffset = rowIndex - (rowIndex % SQUARE_SIZE);
 		int columnOffset = columnIndex - (columnIndex % SQUARE_SIZE);
 		for (int i = rowOffset; i < rowOffset + SQUARE_SIZE; i++) {
@@ -93,7 +90,7 @@ public class Solution {
 		}
 	}
 
-	private int[] findFirstEmptyCell(int[][] intBoard) {
+	private int[] getFirstEmptyCellCoordinates(int[][] intBoard) {
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
 				if (intBoard[i][j] == 0) {
@@ -131,5 +128,6 @@ public class Solution {
 				{'.', '.', '.', '.', '8', '.', '.', '7', '9'}
 		};
 		new Solution().solveSudoku(board);
+		Arrays.stream(board).forEach(row -> System.out.println(Arrays.toString(row) + '\n'));
 	}
 }
