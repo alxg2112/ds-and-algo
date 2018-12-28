@@ -1,10 +1,11 @@
 package com.alxg.leetcode.battleship;
 
-public class Solution {
+public class BattleshipCounter {
+
+  public static final char SHIP = 'X';
+  public static final char WATER = '.';
 
   public int countBattleships(char[][] board) {
-    final char WATER = '.';
-    final char SHIP = 'X';
     int shipCount = 0;
     for (int i = 0; i < board.length; i++) {
       char prev = WATER;
@@ -27,19 +28,5 @@ public class Solution {
     }
 
     return shipCount;
-  }
-
-  public static void main(String[] args) {
-//    System.out.println(new Solution().countBattleships(new char[][]{
-//        {'X', '.', '.', 'X'},
-//        {'.', 'X', '.', 'X'},
-//        {'.', '.', '.', 'X'},
-//        {'X', 'X', '.', 'X'}
-//    }));
-    System.out.println(new Solution().countBattleships(new char[][]{
-        {'.'},
-        {'.'},
-        {'X'}
-    }));
   }
 }

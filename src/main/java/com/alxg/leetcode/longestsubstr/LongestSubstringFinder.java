@@ -1,6 +1,6 @@
 package com.alxg.leetcode.longestsubstr;
 
-public class Solution {
+public class LongestSubstringFinder {
 
   public int lengthOfLongestSubstring(String s) {
     char[] chars = s.toCharArray();
@@ -27,6 +27,6 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-    System.out.println(new Solution().lengthOfLongestSubstring("dvdf"));
+    System.out.println(new LongestSubstringFinder().lengthOfLongestSubstring("dvdf"));
   }
 }

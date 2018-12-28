@@ -1,9 +1,9 @@
-package com.alxg.leetcode.knight;
+package com.alxg.misc.knight;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Solution {
+public class KnightTourSimulator {
 
   private static final int CHESSBOARD_SIZE = 8;
   private static final List<int[]> KNIGHT_MOVES =
@@ -79,6 +79,6 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-    new Solution().knightTour();
+    new KnightTourSimulator().knightTour();
   }
 }

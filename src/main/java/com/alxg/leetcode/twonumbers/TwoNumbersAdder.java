@@ -1,6 +1,6 @@
 package com.alxg.leetcode.twonumbers;
 
-public class Solution {
+public class TwoNumbersAdder {
 
   public static class ListNode {
 
@@ -74,6 +74,6 @@ public class Solution {
     l2.next = new ListNode(6);
     l2.next.next = new ListNode(4);
 
-    System.out.println(new Solution().addTwoNumbers(l1, l2));
+    System.out.println(new TwoNumbersAdder().addTwoNumbers(l1, l2));
   }
 }

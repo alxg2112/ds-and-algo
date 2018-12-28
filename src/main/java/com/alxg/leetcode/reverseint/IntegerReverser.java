@@ -1,6 +1,6 @@
 package com.alxg.leetcode.reverseint;
 
-public class Solution {
+public class IntegerReverser {
 
   public int reverse(int x) {
 
@@ -32,6 +32,6 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-    System.out.println(new Solution().reverse(-123));
+    System.out.println(new IntegerReverser().reverse(-123));
   }
 }

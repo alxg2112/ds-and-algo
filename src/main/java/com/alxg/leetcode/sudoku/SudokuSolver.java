@@ -2,7 +2,7 @@ package com.alxg.leetcode.sudoku;
 
 import java.util.Arrays;
 
-public class Solution {
+public class SudokuSolver {
 
 	private static char EMPTY_CELL = '.';
 	private static int BOARD_SIZE = 9;
@@ -127,7 +127,7 @@ public class Solution {
 				{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
 				{'.', '.', '.', '.', '8', '.', '.', '7', '9'}
 		};
-		new Solution().solveSudoku(board);
+		new SudokuSolver().solveSudoku(board);
 		Arrays.stream(board).forEach(row -> System.out.println(Arrays.toString(row) + '\n'));
 	}
 }
