@@ -1,8 +1,6 @@
 package com.alxg.leetcode.mostwater;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public class MaxAreaFinder {
 
