@@ -4,31 +4,37 @@ public class JumpGame {
 
   public boolean canJump(int[] nums) {
 
-    int pos = 0;
+    int currentPosition = 0;
 
     while (true) {
-      if (pos == nums.length - 1) {
+      // Reached end
+      if (currentPosition == nums.length - 1) {
         return true;
       }
-      if (nums[pos] == 0) {
+      // Cannot jump anymore
+      if (nums[currentPosition] == 0) {
         return false;
       }
-      int maxJumpDistance = nums[pos];
-      int maxTourDistance = nums[pos];
-      int optNextPos = pos + maxJumpDistance;
 
-      if (optNextPos >= nums.length - 1) {
+      int oneJumpMaxDistance = nums[currentPosition];
+      int oneJumpMaxPosition = currentPosition + oneJumpMaxDistance;
+
+      // Can reach end from current position
+      if (oneJumpMaxPosition >= nums.length - 1) {
         return true;
       }
 
-      for (int jumpDistance = 1; jumpDistance < maxJumpDistance; jumpDistance++) {
-        int temp = jumpDistance + nums[pos + jumpDistance];
-        if (temp > maxTourDistance) {
-          maxTourDistance = temp;
-          optNextPos = pos + jumpDistance;
+      // Greedily find max position reachable via two jumps
+      int twoJumpsMaxDistance = nums[currentPosition];
+      int maxPositionAfterTwoJumps = oneJumpMaxPosition;
+      for (int firstJump = 1; firstJump < oneJumpMaxDistance; firstJump++) {
+        int twoJumpsMaxDistanceForGivenFirstJump = firstJump + nums[currentPosition + firstJump];
+        if (twoJumpsMaxDistanceForGivenFirstJump > twoJumpsMaxDistance) {
+          twoJumpsMaxDistance = twoJumpsMaxDistanceForGivenFirstJump;
+          maxPositionAfterTwoJumps = currentPosition + firstJump;
         }
       }
-      pos = optNextPos;
+      currentPosition = maxPositionAfterTwoJumps;
     }
   }
 }
