@@ -2,39 +2,41 @@ package com.alxg.leetcode.permutation;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Permutation {
 
   public List<List<Integer>> permute(int[] numbers) {
+    return generatePermutations(toList(numbers));
+  }
+
+  private List<List<Integer>> generatePermutations(List<Integer> numbers) {
     List<List<Integer>> permutations = new ArrayList<>();
-    generatePermutations(permutations, Collections.emptyList(), toSet(numbers));
+    generatePermutations(permutations, Collections.emptyList(), numbers);
     return permutations;
   }
 
   private void generatePermutations(
       List<List<Integer>> permutations,
       List<Integer> head,
-      Set<Integer> numbers) {
+      List<Integer> numbers) {
     if (numbers.isEmpty()) {
       permutations.add(head);
     }
 
     for (int number : numbers) {
       List<Integer> newHead = copyAppendedWith(head, number);
-      Set<Integer> remainingNumbers = copyWithoutOne(numbers, number);
+      List<Integer> remainingNumbers = copyWithoutOne(numbers, number);
       generatePermutations(permutations, newHead, remainingNumbers);
     }
   }
 
-  private Set<Integer> toSet(int[] numbers) {
-    Set<Integer> set = new HashSet<>();
+  private List<Integer> toList(int[] numbers) {
+    List<Integer> list = new ArrayList<>();
     for (int number : numbers) {
-      set.add(number);
+      list.add(number);
     }
-    return set;
+    return list;
   }
 
   private <T> List<T> copyAppendedWith(List<T> list, T tail) {
@@ -43,10 +45,14 @@ public class Permutation {
     return newList;
   }
 
-  private <T> Set<T> copyWithoutOne(Set<T> set, T toRemove) {
-    Set<T> newSet = new HashSet<>(set);
-    newSet.remove(toRemove);
-    return newSet;
+  private <T> List<T> copyWithoutOne(List<T> list, T toRemove) {
+    List<T> newList = new ArrayList<>(list.size());
+    for (T item : list) {
+      if (!item.equals(toRemove)) {
+        newList.add(item);
+      }
+    }
+    return newList;
   }
 
   public static void main(String[] args) {
