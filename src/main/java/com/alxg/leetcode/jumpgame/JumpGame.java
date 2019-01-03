@@ -26,15 +26,15 @@ public class JumpGame {
 
       // Greedily find max position reachable via two jumps
       int twoJumpsMaxDistance = nums[currentPosition];
-      int maxPositionAfterTwoJumps = oneJumpMaxPosition;
+      int optimalNextPosition = -1;
       for (int firstJump = 1; firstJump <= oneJumpMaxDistance; firstJump++) {
         int twoJumpsMaxDistanceForGivenFirstJump = firstJump + nums[currentPosition + firstJump];
         if (twoJumpsMaxDistanceForGivenFirstJump > twoJumpsMaxDistance) {
           twoJumpsMaxDistance = twoJumpsMaxDistanceForGivenFirstJump;
-          maxPositionAfterTwoJumps = currentPosition + firstJump;
+          optimalNextPosition = currentPosition + firstJump;
         }
       }
-      currentPosition = maxPositionAfterTwoJumps;
+      currentPosition = optimalNextPosition;
     }
   }
 }
