@@ -8,7 +8,7 @@ public class JumpGame {
 
     while (true) {
       // Reached end
-      if (currentPosition == nums.length - 1) {
+      if (currentPosition >= nums.length - 1) {
         return true;
       }
       // Cannot jump anymore
